@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>歡迎光臨我的部落格</title>
-	</head>
-	<body>
-		<h1>歡迎光臨我的部落格</h1>
-		<hr>
-		{% for post in posts %}
-			<p><a href="/post/{{ post.slug }}">{{ post.title }}</a></p>
-		{% endfor %}
-		<hr>
-		<p>現在時刻： {{ now }}</p>
-	</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}歡迎來到 文學天地{% endblock %}
+{% block headmessage %}文章列表{% endblock %}
+{% block content %}
+	{% for post in posts %}
+		<p><a href="/post/{{ post.slug }}">{{ post.title }}</a></p>
+	{% endfor %}
+{% endblock %}

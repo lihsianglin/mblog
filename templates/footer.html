@@ -1,0 +1,7 @@
+{% block footer %}
+	{% if now %}
+		<p>現在時間：{{ now }}</p>
+	{% else %}
+		<p>本文章內容取自網路，如有侵權請來信通知</p>
+	{% endif %}
+{% endblock%}
