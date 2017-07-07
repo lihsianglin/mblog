@@ -1,13 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import redirect
 from django.http import HttpResponse
+from django.template.loader import get_template
+from datetime import datetime
 from .models import Post
 
 # Create your views here.
 
 def homepage(request):
 	posts = Post.objects.all()
-	post_lists = list()
-	for count, post in enumerate(posts):
-		post_lists.append("No.{}:".format(str(count)) + str(post) + "<hr>")
-		post_lists.append(str(post.body) + "<br><br>")
-	return HttpResponse(post_lists)
+	now = datetime.now()
+	template = get_template('index.html')
+	html = template.render(locals())
+	return HttpResponse(html)
+
+def showpost(request, slug):
+	template = get_template('post.html')
+	try:
+		post = Post.objects.get(slug=slug)
+		if post != None:
+			html = template.render(locals())
+			return HttpResponse(html)
+	except:
+		return redirect('/')
